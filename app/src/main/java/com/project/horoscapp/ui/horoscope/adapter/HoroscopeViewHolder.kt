@@ -5,7 +5,6 @@ import android.view.animation.LinearInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.project.horoscapp.databinding.ItemHoroscopeBinding
 import com.project.horoscapp.domain.model.HoroscopeInfo
-import kotlinx.coroutines.NonCancellable.start
 
 class HoroscopeViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val binding = ItemHoroscopeBinding.bind(view)
@@ -17,15 +16,15 @@ class HoroscopeViewHolder(view: View): RecyclerView.ViewHolder(view) {
         binding.tvHoroscope.text= context.getString(horoscopeInfo.name)
 
         binding.Layout.setOnClickListener{
-            startRotationAnimation(binding.ivHoroscope)
-            //onItemSelected(horoscopeInfo)
+            startRotationAnimation(binding.ivHoroscope, newLambda={onItemSelected(horoscopeInfo)})
         }
     }
-    private fun startRotationAnimation(view:View){
+    private fun startRotationAnimation(view:View, newLambda:()->Unit){
         view.animate().apply{
             duration = 500
             interpolator = LinearInterpolator ()
             rotationBy(360f)
+            withEndAction{newLambda()}
             start()
         }
     }
