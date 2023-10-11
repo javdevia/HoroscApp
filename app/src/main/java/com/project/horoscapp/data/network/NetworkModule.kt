@@ -1,5 +1,7 @@
 package com.project.horoscapp.data.network
 
+import com.project.horoscapp.data.RepositoryImplementation
+import com.project.horoscapp.domain.Repository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,8 +16,8 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit {
-        Retrofit
+    fun provideRetrofit():Retrofit {
+        return Retrofit
             .Builder()
             .baseUrl("https://newastro.vercel.app/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -23,7 +25,12 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideHoroscopeApiService(retrofit: Retrofit):HoroscopeApiService{
-        retrofit.create(HoroscopeApiService::class.java)
+    fun provideHoroscopeApiService(retrofit: Retrofit): HoroscopeApiService {
+        return retrofit.create(HoroscopeApiService::class.java)
+    }
+
+    @Provides
+    fun providerRepository(apiService: HoroscopeApiService): Repository {
+        return RepositoryImplementation(apiService)
     }
 }

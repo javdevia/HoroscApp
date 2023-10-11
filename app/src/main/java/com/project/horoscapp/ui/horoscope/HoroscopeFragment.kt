@@ -51,17 +51,17 @@ class HoroscopeFragment : Fragment() {
     private fun initRecyclerView() {
         horoscopeAdapter = HoroscopeAdapter(onItemSelected={
             val type = when(it){
-                Acuario -> HoroscopeModel.Acuario
+                Acuario -> HoroscopeModel.Aquarius
                 Aries -> HoroscopeModel.Aries
                 Cancer -> HoroscopeModel.Cancer
-                Capricornio ->HoroscopeModel.Capricornio
-                Escorpio -> HoroscopeModel.Escorpio
-                Geminis -> HoroscopeModel.Geminis
+                Capricornio ->HoroscopeModel.Capricorn
+                Escorpio -> HoroscopeModel.Scorpio
+                Geminis -> HoroscopeModel.Gemini
                 Leo -> HoroscopeModel.Leo
                 Libra -> HoroscopeModel.Libra
-                Piscis -> HoroscopeModel.Piscis
-                Sagitario -> HoroscopeModel.Sagitario
-                Tauro -> HoroscopeModel.Tauro
+                Piscis -> HoroscopeModel.Pisces
+                Sagitario -> HoroscopeModel.Sagittarius
+                Tauro -> HoroscopeModel.Taurus
                 Virgo -> HoroscopeModel.Virgo
             }
             findNavController().navigate(
